@@ -2,9 +2,13 @@ from odoo import fields, models, api
 
 
 class QuizQuestion(models.Model):
-    _inherit="survey.question"
+    _inherit = "survey.question"
+    _name="quiz.question"
 
-    time_limit = fields.Integer("Time Limit for Answer (seconds)", default=30)
-    points = fields.Integer("Points for Correct Answer", default=10)
-    is_bonus_question = fields.Boolean("Is Bonus Question", default=False)
-    
+    question_type = fields.Selection(
+        selection_add = [
+            ('true_false', 'True or False')
+        ]
+    )
+
+    points = fields.Integer("Points for Correct Answer")

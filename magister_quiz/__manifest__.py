@@ -5,7 +5,13 @@
     'summary': 'Enhances the Survey module with Kahoot! like functionality.',
     'depends': ['survey'],
     'data': [
-        'views/quiz_survey.xml',
+        #Views
+        'views/quiz_survey_views.xml',
+        'views/quiz_question_views.xml',
+        'views/quiz_menus.xml',
+
+        #Security
+        'security/ir.model.access.csv'
     ],
     'controllers': [
         'controllers.main',

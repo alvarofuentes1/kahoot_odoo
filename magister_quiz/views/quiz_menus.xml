@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="menu_quiz_root" name="Quiz" sequence="1"/>
+
+    <!-- Submenú para Encuestas -->
+    <menuitem id="menu_quiz_survey"
+              name="Encuestas"
+              parent="menu_quiz_root"
+              action="action_quiz_survey_kanban"
+              sequence="20"/>
+
+    <!-- Submenú para Preguntas -->
+    <menuitem id="menu_quiz_questions"
+              name="Preguntas"
+              parent="menu_quiz_root"
+              action="action_quiz_question"
+              sequence="30"/>
+
+</odoo>

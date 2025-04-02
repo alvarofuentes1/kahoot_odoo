@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Formulario para Quiz Questions -->
+    <record id="view_quiz_questions_form" model="ir.ui.view">
+        <field name="name">quiz.question.form</field>
+        <field name="model">quiz.question</field>
+        <field name="arch" type="xml">
+            <form string="Quiz Question">
+                <sheet>
+                    <group>
+                        <field name="title"/>
+                        <field name="question_type" widget="radio"/>
+                        <field name="points"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record id="action_quiz_question" model="ir.actions.act_window">
+        <field name="name">Preguntas</field>
+        <field name="res_model">quiz.question</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+</odoo>
