@@ -5,7 +5,6 @@ from odoo import fields, models, api
 
 class QuizSurvey(models.Model):
     _inherit="survey.survey"
-    _name="quiz.survey"
 
     survey_type = fields.Selection([
         ('survey', 'Survey'),
@@ -18,7 +17,7 @@ class QuizSurvey(models.Model):
 
     #is_time_limited (boolean)
     #time_lmit (float) -> tiempo total
-    question_timer = fields.Boolean("Question Time Limit")
+    is_question_timed = fields.Boolean("Question Time Limit")
     time_per_question = fields.Integer("Time per Question (seconds)", default=20)
     """
     session_show_leaderboard = fields.Boolean("Show Session Leaderboard", compute='_compute_session_show_leaderboard',

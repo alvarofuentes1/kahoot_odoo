@@ -2,28 +2,36 @@
 <odoo>
 
     <!-- Formulario para Quiz Questions -->
-    <record id="view_quiz_questions_form" model="ir.ui.view">
-        <field name="name">quiz.question.form</field>
-        <field name="model">quiz.question</field>
+    <record id="view_quiz_questions_form_inherit" model="ir.ui.view">
+        <field name="name">survey.question.form.inherit.quiz</field>
+        <field name="model">survey.question</field>
+        <field name="inherit_id" ref="survey.survey_question_form"/>
         <field name="arch" type="xml">
-            <form string="Quiz Question">
-                <sheet>
-                    <group>
-                        <field name="title"/>
-                        <field name="question_type" widget="radio"/>
-                        <field name="points"/>
-                    </group>
-                </sheet>
-            </form>
+            <!-- Buscar la pestaña de 'answers' y agregar el campo para 'True or False' -->
+            <xpath expr="//notebook/page[@name='answers']" position="inside">
+                <group>
+                    <!-- Campo checkbox para True/False -->
+                    <field name="is_true_or_false"
+                           widget="checkbox"
+                           string="Is this True or False?"
+                           invisible="question_type != 'true_false'"
+                           required="question_type == 'true_false'"/>
+                    <label for="is_scored_question"/>
+                    <div name="survey_scored_question">
+                        <field name="is_scored_question" nolabel="1"/>
+                        <field name="answer_score" class="w-50 mx-2" invisible="not is_scored_question" nolabel="1"/>
+                        <span invisible="not is_scored_question">Points</span>
+                    </div>
+                </group>
+            </xpath>
         </field>
     </record>
 
-     <record id="action_quiz_question" model="ir.actions.act_window">
+    <record id="action_quiz_question" model="ir.actions.act_window">
         <field name="name">Preguntas</field>
-        <field name="res_model">quiz.question</field>
+        <field name="res_model">survey.question</field>
         <field name="view_mode">tree,form</field>
     </record>
-
 
 
 </odoo>
