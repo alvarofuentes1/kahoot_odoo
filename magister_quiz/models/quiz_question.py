@@ -28,4 +28,5 @@ class QuizQuestion(models.Model):
         ('boolean', 'Boolean'),
     ])
 
+    answer_boolean = fields.Selection([('1', 'True'), ('0', 'False')], string="Correct Answer")
     is_true_or_false = fields.Boolean("True or False", default=False)

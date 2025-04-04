@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="question_true_false" name="Question: True or False">
+        <div class="o_survey_answer_wrapper p-1 rounded">
+            <label>
+                <input type="radio" name="answer_#{question.id}" value="1"
+                       t-att-checked="answer_lines and answer_lines[0].value_boolean == 'True'"/>
+                True
+            </label>
+            <br/>
+            <label>
+                <input type="radio" name="answer_#{question.id}" value="0"
+                       t-att-checked="answer_lines and answer_lines[0].value_false == 'False'"/>
+                False
+            </label>
+        </div>
+    </template>
+
+
+    <template id="question_inherit_true_false" inherit_id="survey.question_container">
+        <xpath expr="//t[@t-if=&quot;question.question_type == 'simple_choice'&quot;]" position="after">
+            <t t-if="question.question_type == 'true_false'" t-call="magister_quiz.question_true_false"/>
+        </xpath>
+    </template>
+
+</odoo>

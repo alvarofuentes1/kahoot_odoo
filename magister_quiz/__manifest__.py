@@ -9,6 +9,7 @@
         'views/quiz_survey_views.xml',
         'views/quiz_question_views.xml',
         'views/quiz_menus.xml',
+        'views/quiz_template.xml',
 
         #Security
         'security/ir.model.access.csv'
