@@ -5,18 +5,23 @@
     'summary': 'Enhances the Survey module with Kahoot! like functionality.',
     'depends': ['survey'],
     'data': [
-        #Views
+        # Views
         'views/quiz_survey_views.xml',
         'views/quiz_question_views.xml',
         'views/quiz_menus.xml',
         'views/quiz_template.xml',
 
-        #Security
+        # Security
         'security/ir.model.access.csv'
     ],
     'controllers': [
         'controllers.main',
     ],
+    'assets': {
+        'web.assets_frontend': [
+            'magister_quiz/static/src/css/*',
+        ],
+    },
     'application': 'true',
     'installable': 'true',
 }

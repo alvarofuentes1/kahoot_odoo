@@ -1,0 +1,42 @@
+.kahoot-style {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    font-family: 'Comic Sans MS', sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.kahoot-button-true {
+    background-color: white;
+    color: #26ad15;
+    border: 2px solid;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: background-color 0.5s;
+}
+
+.kahoot-button-true:hover {
+    background-color: #26ad15;
+    color: white;
+}
+
+.kahoot-button-false {
+    background-color: white;
+    color: #dd0d0d;
+    border: 2px solid;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: background-color 0.5s;
+}
+
+.kahoot-button-false:hover {
+    background-color: #dd0d0d;
+    color: white;
+}

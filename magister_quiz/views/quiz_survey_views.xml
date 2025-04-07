@@ -18,7 +18,6 @@
                         seconds
                     </div>
                 </div>
-                <field name="bonus_points" string="Bonus Points" invisible="survey_type != 'quiz'"/>
             </xpath>
         </field>
     </record>

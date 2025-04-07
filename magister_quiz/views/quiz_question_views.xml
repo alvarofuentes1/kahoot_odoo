@@ -11,7 +11,7 @@
             <xpath expr="//notebook/page[@name='answers']" position="inside">
                 <group>
                     <!-- Campo checkbox para True/False -->
-                    <field name="is_true_or_false"
+                    <field name="answer_boolean"
                            widget="checkbox"
                            string="Is this True or False?"
                            invisible="question_type != 'true_false'"
