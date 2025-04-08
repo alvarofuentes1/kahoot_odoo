@@ -3,7 +3,7 @@
     'version': '1.0',
     'category': 'Tools',
     'summary': 'Enhances the Survey module with Kahoot! like functionality.',
-    'depends': ['survey'],
+    'depends': ['base', 'survey'],
     'data': [
         # Views
         'views/quiz_survey_views.xml',
@@ -20,6 +20,7 @@
     'assets': {
         'web.assets_frontend': [
             'magister_quiz/static/src/css/*',
+            'magister_quiz/static/src/js/*',
         ],
     },
     'application': 'true',

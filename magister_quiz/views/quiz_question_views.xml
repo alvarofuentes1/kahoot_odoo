@@ -10,7 +10,6 @@
             <!-- Buscar la pestaña de 'answers' y agregar el campo para 'True or False' -->
             <xpath expr="//notebook/page[@name='answers']" position="inside">
                 <group>
-                    <!-- Campo checkbox para True/False -->
                     <field name="answer_boolean"
                            widget="checkbox"
                            string="Is this True or False?"

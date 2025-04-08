@@ -1,0 +1,14 @@
+#question-timer-container {
+    font-size: 24px;
+    color: white;
+    background-color: #4CAF50;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    margin: 20px;
+}
+
+#question-timer {
+    font-weight: bold;
+    font-size: 30px;
+}

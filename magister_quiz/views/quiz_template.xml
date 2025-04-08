@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+
     <template id="question_true_false" name="Question: True or False">
         <div class="o_survey_answer_wrapper p-1 rounded d-flex gap-3">
             <label>
