@@ -1,10 +1,16 @@
 @font-face {
-    font-family: 'FugazOne';
-    src: url('/magister_quiz/static/src/fonts/FugazOne-Regular.ttf') format('truetype');
+    font-family: 'Poppins-Medium';
+    src: url('/magister_quiz/static/src/fonts/Poppins-Medium.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Poppins-Light';
+    src: url('/magister_quiz/static/src/fonts/Poppins-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .kahoot-style {
     background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
@@ -78,7 +84,7 @@
     border: white !important;
     box-shadow: white !important;
     color: white !important;
-    font-family: 'FugazOne';
+    font-family: 'Poppins-Medium';
 }
 
 .btn-secondary,
@@ -86,12 +92,19 @@
     background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     border: white !important;
     color: white !important;
-    font-family: 'FugazOne';
+    font-family: 'Poppins-Medium';
 }
 
 .text-break {
-    font-family: 'FugazOne';
-    font-size: large;
+    font-family: 'Poppins-Medium';
+}
+
+p{
+    font-family: 'Poppins-Light';
+}
+
+div{
+    font-family: 'Poppins-Light';
 }
 
 /* 

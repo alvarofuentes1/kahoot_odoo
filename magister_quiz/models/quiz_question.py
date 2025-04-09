@@ -5,6 +5,8 @@ _logger = logging.getLogger(__name__)
 
 class QuizQuestion(models.Model):
     _inherit = "survey.question"
+    
+    time_limit = fields.Integer("Tiempo por pregunta (segundos)", default=20)
 
     question_type = fields.Selection([
         ('simple_choice', 'Multiple choice: only one answer'),

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
-
     <template id="question_true_false" name="Question: True or False">
         <div class="o_survey_answer_wrapper p-1 rounded d-flex gap-3">
             <label>
@@ -15,6 +14,7 @@
                     t-att-checked="answer_lines and answer_lines[0].value_boolean == False" />
                 <span class="kahoot-button-false">False</span>
             </label>
+            <p id="question_timer"/>
         </div>
     </template>
 
@@ -26,6 +26,5 @@
                 t-call="magister_quiz.question_true_false" />
         </xpath>
     </template>
-
 
 </odoo>

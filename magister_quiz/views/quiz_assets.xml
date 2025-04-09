@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <template id="assets_survey_timer" name="Survey Timer Assets">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/magister_quiz/static/src/js/question_timer.js" />
+        </xpath>
+    </template>
+</odoo>
