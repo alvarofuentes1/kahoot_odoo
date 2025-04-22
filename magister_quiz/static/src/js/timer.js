@@ -7,13 +7,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function iniciarTemporizador() {
         const temporizador = document.getElementById("question_timer"); //Variable donde aparecen los segundos
+        const titulo = temporizador?.dataset?.surveyTitle; //Variable donde aparece el título del temporizador
+        console.log("Título del temporizador:", titulo);
+        
         if (!temporizador) {
             console.warn("No se encontró el elemento del temporizador.");
             return;
         }
     
         // LLamada a la API para obtener la configuración del temporizador
-        fetch('/quiz/timer/cuestionario de prueba')
+        fetch(`/quiz/timer/${encodeURIComponent(titulo)}`)
             .then(response => response.json())
             .then(data => {
                 console.log("Config del temporizador:", data);

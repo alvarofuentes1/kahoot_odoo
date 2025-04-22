@@ -3,7 +3,7 @@
 
     <template id="question_timer_container" inherit_id="survey.survey_fill_header">
         <xpath expr="//h1[@class='o_survey_timer_container timer text-end']" position="inside">
-            <p id="question_timer"/>
+            <p id="question_timer" t-att-data-survey-title="survey.title"/>
             <script type="text/javascript" src="/magister_quiz/static/src/js/timer.js"/>
         </xpath>
     </template>
