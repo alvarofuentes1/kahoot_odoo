@@ -10,7 +10,6 @@
         'views/quiz_question_views.xml',
         'views/quiz_menus.xml',
         'views/quiz_template.xml',
-        'views/quiz_assets.xml',
 
         # Security
         'security/ir.model.access.csv'
@@ -21,7 +20,7 @@
     'assets': {
         'web.assets_frontend': [
             'magister_quiz/static/src/css/*',
-            'magister_quiz/static/src/js/timer.js',
+            'magister_quiz/static/src/js/timer/*',
         ],
     },
     'application': 'true',

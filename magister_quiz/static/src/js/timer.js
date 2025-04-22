@@ -1,54 +1,45 @@
-odoo.define('magister_quiz.timer', function (require) {
-    "use strict";
+document.addEventListener("DOMContentLoaded", function () {
 
-    const publicWidget = require('web.public.widget');
+    const temporizador = document.getElementById("question_timer");
+    let intervalo;
 
-    publicWidget.registry.QuestionTimer = publicWidget.Widget.extend({
-        selector: '#question_timer',
-        start: function () {
-            let interval;
-            const timerElement = this.$el;
+    function iniciarTemporizador() {
+        let segundos = 10;
+        temporizador.innerHTML = segundos + 's';
 
-            const startTimer = () => {
-                let seconds = 5;
-                timerElement.text(`${seconds}s`);
+        if (intervalo) clearInterval(intervalo);
 
-                if (interval) {
-                    clearInterval(interval);
-                }
+        intervalo = setInterval(() => {
+            segundos--;
+            temporizador.innerHTML = segundos + 's';
 
-                interval = setInterval(() => {
-                    timerElement.text(`${seconds}s`);
-                    seconds--;
+            if (segundos <= 0) {
+                temporizador.innerHTML = '¡Tiempo!';
+                clearInterval(intervalo);
 
-                    if (seconds < 0) {
-                        clearInterval(interval);
-                        const submitButton = document.querySelector("button[type='submit']");
-                        if (submitButton) {
-                            submitButton.click();
-                        } else {
-                            console.warn("No se encontró el botón de submit.");
-                        }
-                    }
+                setTimeout(() => {
+                    // Simular el clic en el botón de enviar
+                    const boton = document.querySelector("button[type='submit']");
+                    if (boton) boton.click();
                 }, 1000);
-            };
-
-            // Observa cambios en el DOM para reiniciar el temporizador
-            const surveyContainer = document.querySelector('.o_survey_form');
-            if (surveyContainer) {
-                const observer = new MutationObserver(() => {
-                    console.log("Se detectaron cambios en el DOM. Reiniciando temporizador...");
-                    startTimer();
-                });
-
-                observer.observe(surveyContainer, {
-                    childList: true,
-                    subtree: true,
-                });
             }
+        }, 1000);
+    }
 
-            // Inicia el temporizador por primera vez
-            startTimer();
+    const surveyContainer = document.querySelector('.o_survey_answer_wrapper');
+    if (!surveyContainer) {
+        console.log("El temporizador NO se ejecuta en esta página.");
+    } else {
+        console.log("El temporizador SI se ejecuta en esta página.");
+        iniciarTemporizador();
+    }
+
+    document.addEventListener("click", function (event) {
+        const clickedElement = event.target; // Elemento que fue clicado
+        if (clickedElement.tagName === "BUTTON" && clickedElement.type === "submit") {
+            console.log("Se hizo clic en un botón de tipo submit. Reiniciando temporizador...");
+            iniciarTemporizador();
         }
     });
+
 });

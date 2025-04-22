@@ -15,7 +15,7 @@ class QuizUserInput(models.Model):
 
     value_boolean = fields.Boolean('Boolean Answer', help="Stores the response for True/False questions")
 
-    def _save_lines(self, question, answer, comment=None, overwrite_existing=True, **kwargs):
+    """def _save_lines(self, question, answer, comment=None, overwrite_existing=True, **kwargs):
         _logger.info(f"Answer received: {answer}")
         _logger.info(f"Correct answer: {question.answer_boolean}")
 
@@ -64,7 +64,7 @@ class QuizUserInput(models.Model):
             return old_answers
         else:
             _logger.info(f"New answer: {vals}")
-            return self.env['survey.user_input.line'].create(vals)
+            return self.env['survey.user_input.line'].create(vals)"""
         
         
     

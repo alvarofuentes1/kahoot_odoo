@@ -17,4 +17,4 @@ class QuizSurvey(models.Model):
     #is_time_limited (boolean)
     #time_lmit (float) -> tiempo total
     is_question_timed = fields.Boolean("Question Time Limit")
-    time_per_question = fields.Integer("Time per Question (seconds)", default=20)
+    time_per_question = fields.Integer("Time per Question (seconds)", default=10)
