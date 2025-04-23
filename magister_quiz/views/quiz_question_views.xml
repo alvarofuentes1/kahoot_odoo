@@ -23,6 +23,11 @@
                     </div>
                 </group>
             </xpath>
+
+            <xpath expr="//field[@name='value']"
+             position="after">
+                    <field name="is_conditional_answer" widget="checkbox"/>
+            </xpath>
         </field>
     </record>
 
