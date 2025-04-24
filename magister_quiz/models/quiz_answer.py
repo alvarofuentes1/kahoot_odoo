@@ -8,7 +8,7 @@ class QuizAnswer(models.Model):
         help="If true, this answer will redirect to another question linked to this one.")
     
     @api.model
-    def create_conditional_question():
+    def create_conditional_question(self):
         for record in self:
             if record.is_conditional_answer:
                 # Create a new question linked to this answer

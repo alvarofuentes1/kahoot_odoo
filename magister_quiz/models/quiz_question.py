@@ -8,7 +8,6 @@ class QuizQuestion(models.Model):
     
     points = fields.Float("Puntos por pregunta", compute="_compute_points")
     bonus_per_second = fields.Float("Bonus en base a timepo de respuesta")
-
     question_type = fields.Selection([
         ('simple_choice', 'Multiple choice: only one answer'),
         ('multiple_choice', 'Multiple choice: multiple answers allowed'),
@@ -20,7 +19,6 @@ class QuizQuestion(models.Model):
         ('matrix', 'Matrix'),
         ('true_false', 'True or False'),
     ])
-
     answer_type = fields.Selection([
         ('text_box', 'Free Text'),
         ('char_box', 'Text'),
@@ -30,10 +28,16 @@ class QuizQuestion(models.Model):
         ('suggestion', 'Suggestion'),
         ('boolean', 'Boolean'),
     ])
-
     answer_boolean = fields.Boolean(
         string="Correct Answer (True/False)",
         help="Mark for True, leave unmarked for False"
+    )
+    is_conditional_question = fields.Boolean("Pregunta condicional", 
+        help="Indica si tras esta pregunta hay otra pregunta condicional")
+    conditional_next_question_id = fields.Many2one(
+        'survey.question', 
+        string="Pregunta condicional siguiente", 
+        help="Pregunta a la que se redirige si la pregunta es condicional"
     )
     
     @api.model
@@ -66,35 +70,3 @@ class QuizQuestion(models.Model):
 
         return super(QuizQuestion, self).create(vals)
 
-    @api.depends('survey_id', 'bonus_per_second')
-    def _compute_points(self):
-        for record in self:
-            
-                if(record.question_type != 'multiple_choice'):
-                    if(record.suevey_id.is_time_limited):
-                        response_time = (record.write_date - record.create_date).total_seconds()
-                        if(response_time > 0):
-                            record.points = (1 - (response_time / record.survey_id.time_per_question)/2) * 1000
-                        else:
-                            record.points = 1000
-                    else:
-                        record.points = 1000
-                else:          
-                    correct_answers = record.survey_id.question_ids.filtered(lambda answer: answer.is_correct)
-                    num_answers = len(correct_answers)
-                    for line in record.user_input_line_ids:
-                        if line.answer_id.is_correct:
-                            user_correct_answers += 1
-                    
-                    if(record.survey_id.is_time_limited):
-                        response_time = (record.write_date - record.create_date).total_seconds()
-                        if(response_time > 0):
-                            record.points = (1 - (response_time / record.survey_id.time_per_question)/2) * 1000 / (user_correct_answers/num_answers)
-                        else:
-                            record.points = 1000 / (user_correct_answers/num_answers)
-                    else:
-                        if(num_answers > 0):
-                            record.points = 1000 / (user_correct_answers/num_answers)
-                        else:
-                            record.points = 0
-            

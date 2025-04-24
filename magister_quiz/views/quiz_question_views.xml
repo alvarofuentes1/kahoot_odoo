@@ -24,10 +24,13 @@
                 </group>
             </xpath>
 
-            <xpath expr="//field[@name='value']"
-             position="after">
-                    <field name="is_conditional_answer" widget="checkbox"/>
+            <xpath expr="//notebook/page[@name='options']//field[@name='triggering_answer_ids']" position="before">
+                <group>
+                    <field name="is_conditional_question" widget="checkbox"
+                        string="Is this a conditional question?"/>
+                </group>
             </xpath>
+
         </field>
     </record>
 

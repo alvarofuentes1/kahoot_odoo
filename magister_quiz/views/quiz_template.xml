@@ -8,4 +8,27 @@
         </xpath>
     </template>
 
+    <template id="survey_ranking_template">
+        <t t-if="ranking">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Posición</th>
+                        <th>Usuario</th>
+                        <th>Puntuación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="ranking" t-as="rank">
+                        <tr>
+                            <td><t t-esc="rank.rank_position"/></td>
+                            <td><t t-esc="rank.user_name"/></td>
+                            <td><t t-esc="rank.total_score"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </t>
+    </template>
+
 </odoo>
