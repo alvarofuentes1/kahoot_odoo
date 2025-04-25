@@ -6,6 +6,11 @@ class QuizAnswer(models.Model):
     is_conditional_answer = fields.Boolean(
         "Is Conditional Answer", 
         help="If true, this answer will redirect to another question linked to this one.")
+    next_conditional_question_id = fields.Many2one(
+        'survey.question', 
+        string="Conditional Question", 
+        help="Pregunta a la que se redirige si la pregunta es condicional"
+    )
     
     @api.model
     def create_conditional_question(self):

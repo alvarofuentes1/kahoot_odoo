@@ -7,7 +7,6 @@ _logger = logging.getLogger(__name__)
 class QuizUserInputLine(models.Model):
     _inherit = "survey.user_input.line"
 
-    value_boolean = fields.Boolean("True/False Answer")
     response_time = fields.Float("Response Time", help="Time taken to answer the question in seconds")
     score = fields.Float("Puntuación", default=0.0)
 
@@ -46,10 +45,3 @@ class QuizUserInputLine(models.Model):
                             
 
 
-class QuizUserInput(models.Model):
-    _inherit = "survey.user_input"
-
-    value_boolean = fields.Boolean('Boolean Answer', help="Stores the response for True/False questions")
-
-        
-    

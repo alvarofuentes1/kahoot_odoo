@@ -32,13 +32,6 @@ class QuizQuestion(models.Model):
         string="Correct Answer (True/False)",
         help="Mark for True, leave unmarked for False"
     )
-    is_conditional_question = fields.Boolean("Pregunta condicional", 
-        help="Indica si tras esta pregunta hay otra pregunta condicional")
-    conditional_next_question_id = fields.Many2one(
-        'survey.question', 
-        string="Pregunta condicional siguiente", 
-        help="Pregunta a la que se redirige si la pregunta es condicional"
-    )
     
     @api.model
     def create(self, vals):
@@ -70,3 +63,4 @@ class QuizQuestion(models.Model):
 
         return super(QuizQuestion, self).create(vals)
 
+    
