@@ -9,19 +9,7 @@ class QuizAnswer(models.Model):
     next_conditional_question_id = fields.Many2one(
         'survey.question', 
         string="Conditional Question", 
-        help="Pregunta a la que se redirige si la pregunta es condicional"
+        help="Pregunta a la que se redirige si la pregunta es condicional, IMPORTANTE: se saltarán las preguntas entre esta y la pregunta condicional, además, está deberá ser creada de antemano"
     )
-    
-    @api.model
-    def create_conditional_question(self):
-        for record in self:
-            if record.is_conditional_answer:
-                # Create a new question linked to this answer
-                new_question = self.env['survey.question'].create({
-                    'title': "Conditional Question",
-                    'question_type': 'simple_choice',
-                    'survey_id': record.survey_id.id,
-                })
-                
-                # Link the new question to the answer
-                record.write({'conditional_question_id': new_question.id})
+    survey_id = fields.Many2one(related="question_id.survey_id", string="Survey", store=True)
+    explanation = fields.Text("Explanation")

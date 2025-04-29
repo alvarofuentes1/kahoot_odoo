@@ -43,5 +43,15 @@ class QuizUserInputLine(models.Model):
                             record.score = 0
                             
                             
+class QuizUserInput(models.Model):
+    _inherit = "survey.user_input"
 
-
+    def has_selected_the_trigger_answer_for(self, question):
+        """Check if the user selected an answer that triggers this question."""
+        self.ensure_one()
+        for line in self.user_input_line_ids:
+            # Revisamos si la respuesta marcada tiene como siguiente esta pregunta
+            answer = line.suggested_answer_id
+            if answer and answer.next_conditional_question_id == question:
+                return True
+        return False

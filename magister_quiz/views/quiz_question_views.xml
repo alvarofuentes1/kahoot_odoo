@@ -28,7 +28,9 @@
             <xpath expr="//field[@name='suggested_answer_ids']//field[@name='is_correct']"
                 position="after">
                 <field name="is_conditional_answer" widget="checkbox" />
-                <field name="next_conditional_question_id" />
+                <field name="next_conditional_question_id" options="{'no_create': True}"
+                    domain="[('survey_id', '=',  survey_id)]" />
+                <field name="survey_id" column_invisible="True" />
             </xpath>
 
 

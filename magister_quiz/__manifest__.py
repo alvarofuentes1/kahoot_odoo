@@ -21,7 +21,7 @@
         'web.assets_frontend': [
             'magister_quiz/static/src/css/*',
             'magister_quiz/static/src/js/*',
-        ],
+        ],    
     },
     'application': 'true',
     'installable': 'true',

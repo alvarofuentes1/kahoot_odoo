@@ -10,8 +10,7 @@ class QuizSurvey(models.Model):
         ('live_session', 'Live session'),
         ('assessment', 'Assessment'),
         ('custom', 'Custom'),
-        ('quiz', 'Quiz'),
-        ],
+        ('quiz', 'Quiz')],
     )
     is_question_timed = fields.Boolean("Question Time Limit")
     time_per_question = fields.Integer("Time per Question (seconds)", default=10)
@@ -27,49 +26,41 @@ class QuizSurvey(models.Model):
 
         # --- ✅ INICIO: Lógica condicional personalizada estilo Kahoot ---
         if not go_back and survey.questions_layout == 'page_per_question':
-            # Buscar la última línea respondida correspondiente a esta pregunta
             last_input_line = user_input.user_input_line_ids.filtered(
                 lambda l: l.question_id.id == page_or_question_id
             )
-
             if last_input_line:
-                # Si es selección única
                 conditional_answer = last_input_line.suggested_answer_id
-                # O si es selección múltiple (buscar la primera condicional)
-                if not conditional_answer:
+                if not conditional_answer and hasattr(last_input_line, 'answer_ids'):
                     conditional_answer = last_input_line.answer_ids.filtered('is_conditional_answer')[:1]
+                
+                if conditional_answer and conditional_answer.is_conditional_answer:
+                    next_conditional = conditional_answer.next_conditional_question_id
+                    if next_conditional and next_conditional.id in pages_or_questions.ids:
+                        return next_conditional
+        # --- ✅ FIN Kahoot Condicional ---
 
-                next_conditional = conditional_answer.next_conditional_question_id
-                if (
-                    conditional_answer and
-                    conditional_answer.is_conditional_answer and
-                    next_conditional and
-                    next_conditional.id in pages_or_questions.ids
-                ):
-                    return next_conditional
-
-        # --- ✅ FIN: Lógica condicional personalizada ---
-
-        # Get Next
+        # --- Odoo default logic ---
         if not go_back:
             if not pages_or_questions:
                 return Question
             if page_or_question_id == 0:
                 return pages_or_questions[0]
 
-        current_page_index = pages_or_questions.ids.index(page_or_question_id)
+        try:
+            current_page_index = pages_or_questions.ids.index(page_or_question_id)
+        except ValueError:
+            return Question  # Prevención: el id no existe
 
         if (go_back and current_page_index == 0) or (not go_back and current_page_index == len(pages_or_questions) - 1):
             return Question
 
-
-
-        # Conditional Questions Management (original de Odoo)
         triggering_answers_by_question, _, selected_answers = user_input._get_conditional_values()
         inactive_questions = user_input._get_inactive_conditional_questions()
+
         if survey.questions_layout == 'page_per_question':
-            question_candidates = pages_or_questions[0:current_page_index] if go_back \
-                else pages_or_questions[current_page_index + 1:]
+            question_candidates = pages_or_questions[0:current_page_index] if go_back else pages_or_questions[current_page_index + 1:]
+            
             for question in question_candidates.sorted(reverse=go_back):
                 if question.is_page:
                     contains_active_question = any(sub_question not in inactive_questions for sub_question in question.question_ids)
@@ -77,12 +68,22 @@ class QuizSurvey(models.Model):
                     if contains_active_question or is_description_section:
                         return question
                 else:
-                    triggering_answers = triggering_answers_by_question.get(question)
-                    if not triggering_answers or triggering_answers & selected_answers:
-                        return question
+                    if question in inactive_questions:
+                        continue
+
+                    if question.depends_on_conditional_answer():
+                        if user_input.has_selected_the_trigger_answer_for(question):
+                            return question
+                        else:
+                            continue  # No mostrar preguntas condicionales no activadas
+                    else:
+                        triggering_answers = triggering_answers_by_question.get(question)
+                        if not triggering_answers or triggering_answers & selected_answers:
+                            return question
+
         elif survey.questions_layout == 'page_per_section':
-            section_candidates = pages_or_questions[0:current_page_index] if go_back \
-                else pages_or_questions[current_page_index + 1:]
+            section_candidates = pages_or_questions[0:current_page_index] if go_back else pages_or_questions[current_page_index + 1:]
+            
             for section in section_candidates.sorted(reverse=go_back):
                 contains_active_question = any(question not in inactive_questions for question in section.question_ids)
                 is_description_section = not section.question_ids and not is_html_empty(section.description)
@@ -90,3 +91,4 @@ class QuizSurvey(models.Model):
                     return section
 
         return Question
+

@@ -8,26 +8,7 @@ class QuizQuestion(models.Model):
     
     points = fields.Float("Puntos por pregunta", compute="_compute_points")
     bonus_per_second = fields.Float("Bonus en base a timepo de respuesta")
-    question_type = fields.Selection([
-        ('simple_choice', 'Multiple choice: only one answer'),
-        ('multiple_choice', 'Multiple choice: multiple answers allowed'),
-        ('text_box', 'Multiple Lines Text Box'),
-        ('char_box', 'Single Line Text Box'),
-        ('numerical_box', 'Numerical Value'),
-        ('date', 'Date'),
-        ('datetime', 'Datetime'),
-        ('matrix', 'Matrix'),
-        ('true_false', 'True or False'),
-    ])
-    answer_type = fields.Selection([
-        ('text_box', 'Free Text'),
-        ('char_box', 'Text'),
-        ('numerical_box', 'Number'),
-        ('date', 'Date'),
-        ('datetime', 'Datetime'),
-        ('suggestion', 'Suggestion'),
-        ('boolean', 'Boolean'),
-    ])
+    question_type = fields.Selection(selection_add=[('true_false', 'True or False')])
     answer_boolean = fields.Boolean(
         string="Correct Answer (True/False)",
         help="Mark for True, leave unmarked for False"
@@ -63,4 +44,10 @@ class QuizQuestion(models.Model):
 
         return super(QuizQuestion, self).create(vals)
 
-    
+    def depends_on_conditional_answer(self):
+        """Check if this question is targeted by any conditional answer."""
+        self.ensure_one()
+        return bool(self.env['survey.question.answer'].search([
+            ('next_conditional_question_id', '=', self.id),
+            ('is_conditional_answer', '=', True)
+        ], limit=1))

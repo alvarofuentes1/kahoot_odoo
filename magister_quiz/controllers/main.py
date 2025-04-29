@@ -34,21 +34,31 @@ class SurveyRedirectController(http.Controller):
 
     @http.route('/survey/set_response_time', type='json', auth='user')
     def set_response_time(self, **kwargs):
-        question_id = kwargs.get('question_id')
-        response_time = kwargs.get('response_time')
+        _logger.info("HEADER: %s", request.httprequest.headers)
+        _logger.info("BODY: %s", request.httprequest.data)
+        _logger.info("CONTENT-TYPE: %s", request.httprequest.content_type)
 
-        _logger.info(f"Recibiendo tiempo de respuesta: {response_time} para la línea de entrada: {question_id}")
+        # Procesar el cuerpo de la solicitud manualmente
+        try:
+            data = json.loads(request.httprequest.data.decode('utf-8'))
+        except json.JSONDecodeError:
+            return {"status": "error", "message": "Cuerpo de la solicitud no es un JSON válido"}
 
-        if not question_id or response_time is None:
+        question_id = data.get('question_id')
+        response_time = data.get('response_time')
+        
+        if not (question_id and response_time):
             return {"status": "error", "message": "Datos incompletos"}
 
-        input_line = request.env['survey.user_input_line'].sudo().browse(int(question_id))
+        input_line = request.env['survey.user_input.line'].sudo().search([
+            ('question_id', '=', int(question_id)),
+        ], limit=1)
         if input_line.exists():
             input_line.write({'response_time': float(response_time)})
+            _logger.info("User input line actualizado: %s", input_line.read())
             return {"status": "ok"}
         else:
             return {"status": "error", "message": "Respuesta no encontrada"}
-        
     
     @http.route('/survey/<int:survey_id>/ranking', type='json', auth='public', methods=['GET'])
     def get_ranking(self, survey_id):

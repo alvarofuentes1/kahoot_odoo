@@ -50,44 +50,45 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     let startTime = null; // Variable para almacenar el tiempo de inicio
+    let tiempoDeRespuesta = 0; // Variable para almacenar el tiempo de respuesta
 
     function registrarTiempoDeInicio() {
         startTime = Date.now();
-        console.log("Tiempo de inicio registrado:", startTime);
     }
 
     function calcularTiempoDeRespuesta() {
         if (startTime) {
-            const tiempoDeRespuesta = (Date.now() - startTime) / 1000; // Convertir a segundos
+            tiempoDeRespuesta = (Date.now() - startTime) / 1000; // Convertir a segundos
             return tiempoDeRespuesta;
         } else {
-            console.warn("El tiempo de inicio no está registrado.");
             return 0;
         }
     }
 
     function enviarTiempoDeRespuesta(questionId, responseTime) {
+        let userInputToken = window.location.pathname.split('/')[3];
+
         fetch("/survey/set_response_time", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "X-Requested-With": "XMLHttpRequest"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                question_id: 57,
-                response_time: 8.4
+                question_id: questionId,
+                response_time: tiempoDeRespuesta,
+                user_input_token: userInputToken
             })
         })
             .then(response => {
-                console.log("Respuesta del servidor:", response);
+                console.log("Response:", response);
                 return response.json()
             })
             .then(data => {
-                console.log("Respuesta del servidor:", data);
-                if (data.status === "ok") {
-                    console.log("Tiempo de respuesta guardado en survey.user_input_line");
+                console.log("Data:", data);
+                if (data.result.status === "ok") {
+                    console.log("Tiempo de respuesta guardado en survey.user_input.line");
                 } else {
-                    console.error("Error:", data.message);
+                    console.error("Data error:", data.message);
                 }
             })
             .catch(error => console.error("Error en fetch:", error));
@@ -105,15 +106,14 @@ document.addEventListener("DOMContentLoaded", function () {
         document.addEventListener("click", function (event) {
             const clickedElement = event.target;
             if (clickedElement.tagName === "BUTTON" && clickedElement.type === "submit") {
-                console.log("Botón clicado, calculando tiempo de respuesta...");
-                const tiempoDeRespuesta = calcularTiempoDeRespuesta();
+                tiempoDeRespuesta = calcularTiempoDeRespuesta();
                 console.log("Tiempo de respuesta:", tiempoDeRespuesta);
 
                 // Seleccionar el contenedor principal
                 const answerWrapper = document.querySelector('.o_survey_answer_wrapper');
 
                 if (answerWrapper) {
-                    const questionId = answerWrapper.getAttribute('data-name');
+                    questionId = answerWrapper.getAttribute('data-name');
                     console.log("Question ID:", questionId);
 
                     if (questionId) {
@@ -140,7 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!surveyContainer) {
         console.log("El temporizador NO se ejecuta en esta página.");
     } else {
-        console.log("El temporizador SI se ejecuta en esta página.");
         iniciarTemporizador();
     }
 
@@ -148,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (event) {
         const clickedElement = event.target; // Elemento que fue clicado
         if (clickedElement.tagName === "BUTTON" && clickedElement.type === "submit") {
-            console.log("Se hizo clic en un botón de tipo submit. Reiniciando temporizador...");
             iniciarTemporizador();
         }
     });

@@ -5,6 +5,7 @@
         <xpath expr="//h1[@class='o_survey_timer_container timer text-end']" position="inside">
             <p id="question_timer" t-att-data-survey-title="survey.title"/>
             <script type="text/javascript" src="/magister_quiz/static/src/js/timer.js"/>
+
         </xpath>
     </template>
 
@@ -30,5 +31,6 @@
             </table>
         </t>
     </template>
+
 
 </odoo>

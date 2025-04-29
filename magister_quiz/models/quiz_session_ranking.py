@@ -16,7 +16,7 @@ class QuizSessionRanking(models.Model):
         Calcular el ranking al finalizar una encuesta
         """
         # Primero obtenemos todas las respuestas de los usuarios en la encuesta
-        user_input_lines = self.env['survey.user_input_line'].search([
+        user_input_lines = self.env['survey.user_input.line'].search([
             ('survey_id', '=', survey_id)
         ])
         
