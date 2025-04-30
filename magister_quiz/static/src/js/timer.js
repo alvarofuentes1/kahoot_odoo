@@ -64,9 +64,34 @@ document.addEventListener("DOMContentLoaded", function () {
             return 0;
         }
     }
+    
+    // Antes de enviar el tiempo de respuesta, llama a la función enviarRespuestasYTiempo para obtener el ID de la respuesta(user_input.line)
+    // async function enviarRespuestasYTiempo(postData, tiempoDeRespuesta, questionId) {
+    //     const pathParts = window.location.pathname.split('/');
+    //     const survey_token = pathParts[3];
+    //     const answer_token = pathParts[4];
 
-    function enviarTiempoDeRespuesta(questionId, responseTime) {
-        let userInputToken = window.location.pathname.split('/')[3];
+    //     // Primero envías las respuestas como lo hace Odoo normalmente
+    //     const response = await fetch("/survey/submit/" + survey_token + "/" + answer_token, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(postData)
+    //     });
+    
+    //     const data = await response.json();
+    
+    //     // Una vez se ha guardado el input_line, ahora sí envías el tiempo
+    //     if (data && !data.error) {
+    //         console.log("Respuesta guardada correctamente:", data);
+    //     } else {
+    //         console.warn("No se pudo guardar la respuesta, no se envía tiempo");
+    //     }
+    // }
+
+    function enviarTiempoDeRespuesta(questionId, tiempoDeRespuesta) {
+
 
         fetch("/survey/set_response_time", {
             method: "POST",
@@ -76,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
             body: JSON.stringify({
                 question_id: questionId,
                 response_time: tiempoDeRespuesta,
-                user_input_token: userInputToken
             })
         })
             .then(response => {

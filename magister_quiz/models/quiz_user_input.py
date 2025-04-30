@@ -55,3 +55,15 @@ class QuizUserInput(models.Model):
             if answer and answer.next_conditional_question_id == question:
                 return True
         return False
+    
+    def _save_lines(self, question, answer, comment=None, overwrite_existing=True):
+        """ Sobrescribimos el método para capturar response_time desde el contexto """
+        input_line = super()._save_lines(question, answer, comment, overwrite_existing)
+
+        response_time_map = self._context.get('response_time_map') or {}
+        response_time = response_time_map.get(str(question.id))  # viene como string desde el JS
+
+        if response_time and input_line:
+            input_line.write({'response_time': float(response_time)})
+
+        return input_line

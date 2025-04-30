@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="your_module.CounterTemplate" owl="1">
+        <button t-on-click="increment">
+            Contador: <t t-esc="state.count"/>
+        </button>
+    </t>
+</templates>

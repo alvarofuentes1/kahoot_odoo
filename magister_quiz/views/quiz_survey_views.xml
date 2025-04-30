@@ -4,19 +4,17 @@
     <record id="view_quiz_survey_form_inherit" model="ir.ui.view">
         <field name="name">survey.survey.form.inherit.quiz</field>
         <field name="model">survey.survey</field>
-        <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+        <field name="inherit_id" ref="survey.survey_survey_view_form" />
         <field name="arch" type="xml">
             <!-- Insertamos los campos en la sección "Time & Scoring" -->
             <xpath expr="//group[@name='scoring']" position="inside">
                 <label for="is_question_timed" string="Time per Question"
-                       invisible="survey_type != 'quiz'"/>
+                    invisible="survey_type != 'quiz'" />
                 <div class="o_checkbox_optional_field"
-                     invisible="survey_type != 'quiz'">
-                    <field name="is_question_timed" nolabel="1"/>
+                    invisible="survey_type != 'quiz'">
+                    <field name="is_question_timed" nolabel="1" />
                     <div invisible="not is_question_timed">
-                        <field name="time_per_question" nolabel="1" class="oe_inline"/>
-                        seconds
-                    </div>
+                        <field name="time_per_question" nolabel="1" class="oe_inline" /> seconds </div>
                 </div>
             </xpath>
         </field>

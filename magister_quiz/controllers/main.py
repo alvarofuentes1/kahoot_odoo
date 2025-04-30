@@ -51,8 +51,8 @@ class SurveyRedirectController(http.Controller):
             return {"status": "error", "message": "Datos incompletos"}
 
         input_line = request.env['survey.user_input.line'].sudo().search([
-            ('question_id', '=', int(question_id)),
-        ], limit=1)
+            ('question_id', '=', int(question_id))
+        ], order="create_date desc", limit=1)
         if input_line.exists():
             input_line.write({'response_time': float(response_time)})
             _logger.info("User input line actualizado: %s", input_line.read())
