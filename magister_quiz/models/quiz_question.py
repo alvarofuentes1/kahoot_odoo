@@ -7,7 +7,7 @@ class QuizQuestion(models.Model):
     _inherit = "survey.question"
     
     points = fields.Float("Puntos por pregunta", compute="_compute_points")
-    bonus_per_second = fields.Float("Bonus en base a timepo de respuesta")
+    bonus_per_second = fields.Float("Bonus en base a tiempo de respuesta")
     question_type = fields.Selection(selection_add=[('true_false', 'True or False')])
     answer_boolean = fields.Boolean(
         string="Correct Answer (True/False)",

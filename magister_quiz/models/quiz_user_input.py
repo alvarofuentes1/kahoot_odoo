@@ -41,6 +41,7 @@ class QuizUserInputLine(models.Model):
                             record.score = 1000 / (user_correct_answers/num_answers)
                         else:
                             record.score = 0
+           
                             
                             
 class QuizUserInput(models.Model):

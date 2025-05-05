@@ -16,6 +16,7 @@
                     <div invisible="not is_question_timed">
                         <field name="time_per_question" nolabel="1" class="oe_inline" /> seconds </div>
                 </div>
+                <div id="my_counter_component">Counter</div>
             </xpath>
         </field>
     </record>

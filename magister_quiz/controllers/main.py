@@ -46,13 +46,24 @@ class SurveyRedirectController(http.Controller):
 
         question_id = data.get('question_id')
         response_time = data.get('response_time')
+        user_input_token = data.get('user_input_token')
         
-        if not (question_id and response_time):
-            return {"status": "error", "message": "Datos incompletos"}
+        if not (question_id and response_time and user_input_token):
+            return {"status": "error", "message": "Datos incompletos"}    
+        
+        user_input = request.env['survey.user_input'].sudo().search([
+            ('access_token', '=', user_input_token),
+        ], limit=1)
+        
+        if not user_input:
+            return {"status": "error", "message": "Token de usuario no encontrado"}
+        else: _logger.info("USER_INPUT: %s", user_input.read())
 
         input_line = request.env['survey.user_input.line'].sudo().search([
-            ('question_id', '=', int(question_id))
-        ], order="create_date desc", limit=1)
+            ('question_id', '=', int(question_id)),
+        ],order="create_date desc", limit=1)
+        
+        _logger.info("USER_INPUT_ID: %s", request.session.get('survey_user_input_id'))
         if input_line.exists():
             input_line.write({'response_time': float(response_time)})
             _logger.info("User input line actualizado: %s", input_line.read())
