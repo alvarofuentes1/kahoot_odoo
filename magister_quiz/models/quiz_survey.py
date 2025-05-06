@@ -14,7 +14,7 @@ class QuizSurvey(models.Model):
     )
     is_question_timed = fields.Boolean("Question Time Limit")
     time_per_question = fields.Integer("Time per Question (seconds)", default=10)
-    
+     
     def finalizeSurvey(self):
         
         self.env['survey.session_ranking'].calculate_ranking(self.id)

@@ -21,6 +21,7 @@
         'web.assets_frontend': [
             'magister_quiz/static/src/css/*',
             'magister_quiz/static/src/js/*',
+            'magister_quiz/static/src/xml/*',
             'magister_quiz/static/src/components/*',
             'magister_quiz/static/src/js/main.js',
             'magister_quiz/static/src/js/counter.js',

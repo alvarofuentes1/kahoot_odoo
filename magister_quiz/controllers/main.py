@@ -34,15 +34,12 @@ class SurveyRedirectController(http.Controller):
 
     @http.route('/survey/set_response_time', type='json', auth='user')
     def set_response_time(self, **kwargs):
-        _logger.info("HEADER: %s", request.httprequest.headers)
-        _logger.info("BODY: %s", request.httprequest.data)
-        _logger.info("CONTENT-TYPE: %s", request.httprequest.content_type)
 
         # Procesar el cuerpo de la solicitud manualmente
         try:
             data = json.loads(request.httprequest.data.decode('utf-8'))
         except json.JSONDecodeError:
-            return {"status": "error", "message": "Cuerpo de la solicitud no es un JSON válido"}
+            return {"status": "error", "message": "Cuerpo de la solicitud no es un JSON válido"}      
 
         question_id = data.get('question_id')
         response_time = data.get('response_time')
@@ -57,19 +54,22 @@ class SurveyRedirectController(http.Controller):
         
         if not user_input:
             return {"status": "error", "message": "Token de usuario no encontrado"}
-        else: _logger.info("USER_INPUT: %s", user_input.read())
 
         input_line = request.env['survey.user_input.line'].sudo().search([
             ('question_id', '=', int(question_id)),
+            ('user_input_id', '=', user_input.id),
         ],order="create_date desc", limit=1)
         
-        _logger.info("USER_INPUT_ID: %s", request.session.get('survey_user_input_id'))
         if input_line.exists():
             input_line.write({'response_time': float(response_time)})
+            input_line._compute_score() #Funcion para asignar puntuación en base al tiempo de respuesta
             _logger.info("User input line actualizado: %s", input_line.read())
+            
+            
             return {"status": "ok"}
         else:
             return {"status": "error", "message": "Respuesta no encontrada"}
+        
     
     @http.route('/survey/<int:survey_id>/ranking', type='json', auth='public', methods=['GET'])
     def get_ranking(self, survey_id):

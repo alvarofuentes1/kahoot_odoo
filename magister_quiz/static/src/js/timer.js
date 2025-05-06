@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return 0;
         }
     }
-    
+
     // Antes de enviar el tiempo de respuesta, llama a la función enviarRespuestasYTiempo para obtener el ID de la respuesta(user_input.line)
     async function enviarRespuestasYTiempo(postData) {
         const pathParts = window.location.pathname.split('/');
@@ -79,9 +79,9 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify(postData)
         });
-    
+
         const data = await response.json();
-    
+
         // Una vez se ha guardado el input_line, ahora sí envías el tiempo
         if (data && !data.error) {
             console.log("Respuesta guardada correctamente:", data);
@@ -91,35 +91,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function enviarTiempoDeRespuesta(questionId, tiempoDeRespuesta) {
-        let userInputToken = window.location.pathname.split('/')[3]; 
+        let userInputToken = window.location.pathname.split('/')[3];
 
         console.log("User Input Token:", userInputToken);
 
-        fetch("/survey/set_response_time", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                question_id: questionId,
-                response_time: tiempoDeRespuesta,
-                user_input_token: userInputToken
-            })
-        })
-            .then(response => {
-                console.log("Response:", response);
-                return response.json()
-            })
-            .then(data => {
-                console.log("Data:", data);
-                if (data.result.status === "ok") {
-                    console.log("Tiempo de respuesta guardado en survey.user_input.line");
-                } else {
-                    console.error("Data error:", data.message);
-                }
-            })
-            .catch(error => console.error("Error en fetch:", error));
+        setTimeout(() => {
             
+            fetch("/survey/set_response_time", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    question_id: questionId,
+                    response_time: tiempoDeRespuesta,
+                    user_input_token: userInputToken
+                })
+            })
+                .then(response => {
+                    console.log("Response:", response);
+                    return response.json()
+                })
+                .then(data => {
+                    console.log("Data:", data);
+                    if (data.result.status === "ok") {
+                        console.log("Tiempo de respuesta guardado en survey.user_input.line");
+                    } else {
+                        console.error("Data error:", data.message);
+                    }
+                })
+                .catch(error => console.error("Error en fetch:", error));
+
+        }, 1000); // Esperar un segundo antes de enviar el tiempo
+
+
+
     }
 
 

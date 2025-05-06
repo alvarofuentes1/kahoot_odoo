@@ -33,7 +33,6 @@
                 <field name="survey_id" column_invisible="True" />
             </xpath>
 
-
         </field>
     </record>
 

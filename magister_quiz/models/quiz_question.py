@@ -6,7 +6,7 @@ _logger = logging.getLogger(__name__)
 class QuizQuestion(models.Model):
     _inherit = "survey.question"
     
-    points = fields.Float("Puntos por pregunta", compute="_compute_points")
+    points = fields.Float("Puntos Base", default=1000)
     bonus_per_second = fields.Float("Bonus en base a tiempo de respuesta")
     question_type = fields.Selection(selection_add=[('true_false', 'True or False')])
     answer_boolean = fields.Boolean(
@@ -19,9 +19,6 @@ class QuizQuestion(models.Model):
         if vals.get('question_type') == 'true_false':
             answer_boolean = vals.get('answer_boolean')
             answer_score = vals.get('answer_score', 0)
-
-            _logger.info(f"La pregunta es: {answer_boolean}")
-            _logger.info(f"La puntuación es: {answer_score}")
 
             # Cambiamos a 'simple_choice' para que use la lógica existente de Odoo
             vals['question_type'] = 'simple_choice'

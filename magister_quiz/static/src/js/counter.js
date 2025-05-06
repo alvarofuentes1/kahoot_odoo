@@ -16,14 +16,9 @@ export class Counter extends Component {
     }
 
     static template = /*xml*/`
-    <div class="p-4 bg-gray-100 rounded-lg shadow">
-        <h2 class="text-xl font-bold mb-2">Contador Simple</h2>
-        <p class="mb-4">Valor actual: <span class="font-bold" t-esc="state.count"/></p>
-        <div class="flex space-x-2">
-            <button t-on-click="increment">
-                Incrementar
-            </button>
-        </div>
+    <div>
+        <p>Contador: <span t-esc="state.count"/></p>
+        <button t-on-click="increment">Incrementar</button>
     </div>
 `;
 
