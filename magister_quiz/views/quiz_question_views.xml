@@ -15,13 +15,6 @@
                         string="Is this True or False?"
                         invisible="question_type != 'true_false'"
                         required="question_type == 'true_false'" />
-                    <label for="is_scored_question" />
-                    <div name="survey_scored_question">
-                        <field name="is_scored_question" nolabel="1" />
-                        <field name="answer_score" class="w-50 mx-2"
-                            invisible="not is_scored_question" nolabel="1" />
-                        <span invisible="not is_scored_question">Points</span>
-                    </div>
                 </group>
             </xpath>
 

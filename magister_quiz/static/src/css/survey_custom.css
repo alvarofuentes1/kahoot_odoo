@@ -99,11 +99,52 @@
     font-family: 'Poppins-Medium';
 }
 
-p{
+p {
     font-family: 'Poppins-Light';
 }
 
-div{
+div {
     font-family: 'Poppins-Light';
 }
 
+h1 {
+    font-family: sans-serif;
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+table {
+    font-family: sans-serif;
+
+    th,
+    td {
+        padding: .25em .5em;
+        text-align: left;
+
+        &:nth-child(2) {
+            text-align: right;
+        }
+    }
+
+    td {
+        background-color: #eee !important;
+    }
+
+    th {
+        background-color: #009 !important;
+        color: #fff !important;
+    }
+}
+
+.zigzag {
+    border-collapse: separate;
+    border-spacing: .25em 1em;
+
+    tbody tr:nth-child(odd) {
+        transform: rotate(2deg);
+    }
+
+    tbody tr:nth-child(even) {
+        transform: rotate(-2deg);
+    }
+}

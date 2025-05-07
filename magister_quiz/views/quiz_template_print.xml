@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="ranking_container" inherit_id="survey.survey_page_print">
+        <xpath expr="//fieldset" position="after">
+            <div class="survey_ranking_section">
+                <h3>Top 10 Puntuaciones de la Encuesta</h3>
+                <t t-set="rankings" t-value="request.env['survey.session_ranking'].sudo().search([('survey_id', '=', survey.id)], order='total_score desc', limit=10)"/>
+
+                <t t-if="rankings">
+                    <table class="table table-bordered zigzag">
+                        <thead>
+                            <tr>
+                                <th class="header">Posición</th>
+                                <th class="header">Usuario</th>
+                                <th class="header">Puntuación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="rankings" t-as="ranking" t-index="ranking_index">
+                                <t t-if="ranking.total_score > 0">
+                                    <tr>
+                                        <td><t t-esc="ranking_index + 1"/></td>
+                                        <td>
+                                            <t t-if="ranking.user_id and ranking.user_id">
+                                                <t t-esc="ranking.user_id.name"/>
+                                            </t>
+                                            <t t-else="">Usuario desconocido</t>
+                                        </td>
+                                        <td><t t-esc="'%.2f' % ranking.total_score"/></td>
+                                    </tr>
+                                </t>
+                                <t t-else="">
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+                <t t-else="">
+                    <p>No hay puntuaciones aún.</p>
+                </t>                
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

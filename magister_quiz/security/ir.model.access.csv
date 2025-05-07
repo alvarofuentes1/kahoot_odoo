@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_survey_survey,access.survey.survey,model_survey_survey,,1,1,1,1
 access_survey_question,access.survey.question,model_survey_question,,1,1,1,1
+access_survey_ranking,access.survey.session_ranking,model_survey_session_ranking,,1,1,1,1

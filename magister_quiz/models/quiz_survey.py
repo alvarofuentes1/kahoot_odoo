@@ -13,11 +13,15 @@ class QuizSurvey(models.Model):
         ('quiz', 'Quiz')],
     )
     is_question_timed = fields.Boolean("Question Time Limit")
-    time_per_question = fields.Integer("Time per Question (seconds)", default=10)
+    time_per_question = fields.Integer("Time per Question (seconds)")
+    session_ranking_ids = fields.One2many("survey.session_ranking", "survey_id")
      
-    def finalizeSurvey(self):
-        
-        self.env['survey.session_ranking'].calculate_ranking(self.id)
+    @api.onchange('is_question_timed')
+    def _onchange_is_question_timed(self):
+        if self.is_question_timed:
+            self.time_per_question = 20
+        else:
+            self.time_per_question = 0
         
     def _get_next_page_or_question(self, user_input, page_or_question_id, go_back=False):
         survey = user_input.survey_id

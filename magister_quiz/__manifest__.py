@@ -10,6 +10,7 @@
         'views/quiz_question_views.xml',
         'views/quiz_menus.xml',
         'views/quiz_template.xml',
+        'views/quiz_template_print.xml',
 
         # Security
         'security/ir.model.access.csv'
