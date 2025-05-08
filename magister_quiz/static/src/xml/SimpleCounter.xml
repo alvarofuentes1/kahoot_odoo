@@ -1,9 +1,0 @@
-<!-- static/src/xml/my_template.xml -->
-<templates xml:space="preserve">
-    <t t-name="my_module.MyCounterTemplate" owl="1">
-        <div>
-            <p>Contador: <t t-esc="state.count"/></p>
-            <button t-on-click="increment">Incrementar</button>
-        </div>
-    </t>
-</templates>

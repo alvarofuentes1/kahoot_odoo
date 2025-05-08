@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="your_module.CountdownTimer">
+        <div>
+            <t t-if="state.isActive">
+                <p><t t-esc="state.timeLeft"/>sec</p>
+            </t>
+            <t t-else="">
+                <p>¡Tiempo!</p>
+            </t>
+        </div>
+    </t>
+</templates>

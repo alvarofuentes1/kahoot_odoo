@@ -24,13 +24,7 @@
             'magister_quiz/static/src/js/*',
             'magister_quiz/static/src/xml/*',
             'magister_quiz/static/src/components/*',
-            'magister_quiz/static/src/js/main.js',
-            'magister_quiz/static/src/js/counter.js',
         ],
-        'web.assets_backend':[
-            'magister_quiz/static/src/js/counter.js',
-            'magister_quiz/static/src/js/main.js'
-        ]
     },
     'application': 'true',
     'installable': 'true',

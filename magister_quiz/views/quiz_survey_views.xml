@@ -14,9 +14,10 @@
                     invisible="survey_type != 'quiz'">
                     <field name="is_question_timed" nolabel="1" />
                     <div invisible="not is_question_timed">
-                        <field name="time_per_question" nolabel="1" class="oe_inline" /> seconds </div>
+                        <field name="time_per_question" nolabel="1" class="oe_inline" /> seconds 
+                    </div>
+                    <Counter />
                 </div>
-                <div id="my_counter_component">Counter</div>
             </xpath>
         </field>
     </record>

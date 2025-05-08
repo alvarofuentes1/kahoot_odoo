@@ -69,25 +69,6 @@ class SurveyRedirectController(http.Controller):
             return {"status": "ok"}
         else:
             return {"status": "error", "message": "Respuesta no encontrada"}
-        
-    
-    @http.route('/survey/<int:survey_id>/ranking', type='json', auth='public', methods=['GET'])
-    def get_ranking(self, survey_id):
-        # Obtener el ranking del TOP 10 para la encuesta
-        rankings = self.env['survey.session.ranking'].search([
-            ('survey_id', '=', survey_id)
-        ], order='rank_position asc', limit=10)
-
-        # Formatear la respuesta
-        ranking_data = []
-        for rank in rankings:
-            ranking_data.append({
-                'user_name': rank.user_id.name,
-                'total_score': rank.total_score,
-                'rank_position': rank.rank_position,
-            })
-        
-        return {'ranking': ranking_data}
     
     def _prepare_question_html(self, survey_sudo, answer_sudo, **post):
             """ Survey page navigation is done in AJAX. This function prepare the 'next page' to display in html
@@ -103,7 +84,6 @@ class SurveyRedirectController(http.Controller):
                 suggested = last_answer_line.suggested_answer_id
                 if suggested and suggested.is_conditional_answer and suggested.next_question_id:
                     conditional_question = suggested.next_question_id
-                    _logger.info(f"Pregunta condicional encontrada: {conditional_question.title}")
 
             if conditional_question:
                 survey_data['question'] = conditional_question
