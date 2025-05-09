@@ -5,7 +5,7 @@ import { registry } from "@web/core/registry";
 
 class CountdownTimer extends Component {
 
-    static template = "your_module.CountdownTimer";
+    static template = "magister_quiz.CountdownTimer";
     static props = {
         surveyTitle: { type: String },
         questionId: { type: String },
@@ -118,4 +118,4 @@ class CountdownTimer extends Component {
     }
 }
 
-registry.category("public_components").add("your_module.CountdownTimer", CountdownTimer);
+registry.category("public_components").add("magister_quiz.CountdownTimer", CountdownTimer);

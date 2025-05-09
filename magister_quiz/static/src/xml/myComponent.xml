@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-    <t t-name="your_module.CountdownTimer">
+    <t t-name="magister_quiz.CountdownTimer">
         <div>
             <t t-if="state.isActive">
                 <p><t t-esc="state.timeLeft"/>sec</p>

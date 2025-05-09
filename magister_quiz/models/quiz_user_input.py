@@ -49,7 +49,7 @@ class QuizUserInput(models.Model):
             })
             
             _logger.info("Nuevo Session Ranking creado")
-            _logger.info("user_id: %s", user_input.partner_id.read())
+            _logger.info("user_id: %s", user_input.partner_id.name)
             _logger.info("user_id: %s", user_input.partner_id.id)
             
     def _mark_done(self):

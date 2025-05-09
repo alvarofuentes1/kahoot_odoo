@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { Component } from "@odoo/owl";
+import { Component, useState } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 
 class AnswerFeedback extends Component {
@@ -8,13 +8,28 @@ class AnswerFeedback extends Component {
     static props = {
         isCorrect: { type: Boolean },
         explanation: { type: String, optional: true },
+        showAfterNext: { type: Boolean, optional: true }
     };
 
     setup() {
-        this.state = {
-            showFeedback: true
-        };
+        console.log("Componente AnswerFeedback montado")
+        this.state = useState({
+            showFeedback: false
+        });
     }
+
+    onMounted() {
+        const container = document.querySelector('.o_survey_form');
+        if (container) {
+            container.addEventListener('click', (event) => {
+                if (event.target.matches('.btn-primary[type="submit"]')) {
+                    console.log("Botón siguiente pulsado vía delegación");
+                    this.state.showFeedback = true;
+                }
+            });
+        }
+    }
+    
 }
 
 registry.category("public_components").add("magister_quiz.AnswerFeedback", AnswerFeedback);

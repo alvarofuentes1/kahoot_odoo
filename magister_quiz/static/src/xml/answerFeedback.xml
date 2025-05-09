@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
     <t t-name="magister_quiz.AnswerFeedback">
-        <div t-if="state.showFeedback" class="answer-feedback mt-3">
+        <div t-if="state.showFeedback" class="answer-feedback mt-3" t-att-class="{'fade-in': state.showFeedback}">
             <div t-attf-class="alert {{ props.isCorrect ? 'alert-success' : 'alert-danger' }}">
                 <i t-attf-class="fa {{ props.isCorrect ? 'fa-check' : 'fa-times' }} me-2"/>
                 <strong t-esc="props.isCorrect ? 'Correcto!' : 'Incorrecto'"/>
                 <p t-if="props.explanation" class="mt-2" t-esc="props.explanation"/>
+                <p>Hola :-()</p>
             </div>
         </div>
     </t>

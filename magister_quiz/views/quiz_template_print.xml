@@ -22,7 +22,7 @@
                                     <tr>
                                         <td><t t-esc="ranking_index + 1"/></td>
                                         <td>
-                                            <t t-if="ranking.user_id and ranking.user_id">
+                                            <t t-if="ranking.user_id">
                                                 <t t-esc="ranking.user_id.name"/>
                                             </t>
                                             <t t-else="">Usuario desconocido</t>

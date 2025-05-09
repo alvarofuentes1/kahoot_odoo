@@ -3,21 +3,24 @@
 
     <template id="question_timer_container" inherit_id="survey.survey_fill_header">
         <xpath expr="//h1[@class='o_survey_timer_container timer text-end']" position="inside">
-            <!-- <p id="question_timer" t-att-data-survey-title="survey.title"/>
-            <script type="text/javascript" src="/magister_quiz/static/src/js/timer.js"/> -->
-            <owl-component name="your_module.CountdownTimer" t-props="{
+            <p id="question_timer" t-att-data-survey-title="survey.title"/>
+            <script type="text/javascript" src="/magister_quiz/static/src/js/timer.js"/>
+            <owl-component name="magister_quiz.CountdownTimer" t-props="{
                 surveyTitle: survey.title,
                 questionId: answer.last_question_id.id
             }"/>
         </xpath>
     </template>
-    
-    <template id="survey_question_feedback" inherit_id="survey.survey_fill_form">
-        <xpath expr="//div[contains(@class, 'js_question-wrapper')]" position="inside">
+ 
+    <template id="survey_question_feedback" inherit_id="survey.question_container">
+        <xpath expr="//div" position="inside">
             <owl-component 
                 name="magister_quiz.AnswerFeedback"
-                t-props='{  isCorrect: answer.is_correct,
-                            explanation: answer.explanation }'/>
+                t-props='{
+                    isCorrect: answer.is_correct if answer else False,
+                    explanation: answer.explanation if answer else "",
+                    showAfterNext: true
+                }'/>
         </xpath>
     </template>
 
