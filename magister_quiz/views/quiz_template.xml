@@ -5,10 +5,16 @@
         <xpath expr="//h1[@class='o_survey_timer_container timer text-end']" position="inside">
             <p id="question_timer" t-att-data-survey-title="survey.title"/>
             <script type="text/javascript" src="/magister_quiz/static/src/js/timer.js"/>
-            <!-- <owl-component name="magister_quiz.CountdownTimer" t-props="{
-                surveyTitle: survey.title,
-                questionId: answer.last_question_id.id
-            }"/> -->
+            <t t-if="survey and survey.question_ids">
+                <t t-esc="survey.title"/>
+                <t t-esc="survey.question_ids[0].title"/>
+                <owl-component name="magister_quiz.CountdownTimer"
+                    t-att-t-props="{
+                        'surveyTitle': survey.title,
+                        'questionId': survey.question_ids[0].id
+                    }"/>
+
+            </t>
         </xpath>
     </template>
  
