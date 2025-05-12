@@ -3,7 +3,7 @@
     <t t-name="magister_quiz.CountdownTimer">
         <div>
             <t t-if="state.isActive">
-                <p><t t-esc="state.timeLeft"/>sec</p>
+                <p><t t-esc="state.timeLeft"/>secs</p>
             </t>
             <t t-else="">
                 <p>¡Tiempo!</p>
