@@ -6,8 +6,6 @@
             <p id="question_timer" t-att-data-survey-title="survey.title"/>
             <script type="text/javascript" src="/magister_quiz/static/src/js/timer.js"/>
             <t t-if="survey and survey.question_ids">
-                <t t-esc="survey.title"/>
-                <t t-esc="survey.question_ids[0].title"/>
                 <owl-component name="magister_quiz.CountdownTimer"
                     t-att-t-props="{
                         'surveyTitle': survey.title,

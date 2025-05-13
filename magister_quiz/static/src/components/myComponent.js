@@ -7,8 +7,8 @@ class CountdownTimer extends Component {
 
     static template = "magister_quiz.CountdownTimer";
     static props = {
-        surveyTitle: { type: String },
-        questionId: { type: String },
+        surveyTitle: String,
+        questionId: Number,
         onTimeUp: { type: Function, optional: true },
     };
 

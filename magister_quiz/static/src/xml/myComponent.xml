@@ -2,12 +2,9 @@
 <templates xml:space="preserve">
     <t t-name="magister_quiz.CountdownTimer">
         <div>
-            <t t-if="state.isActive">
-                <p><t t-esc="state.timeLeft"/>sec</p>
-            </t>
-            <t t-else="">
-                <p>¡Tiempo!</p>
-            </t>
+            <p><t t-esc="state.timeLeft"/>sec</p>
+            <p><t t-esc="props.surveyTitle"/></p>
+            <p><t t-esc="props.questionId"/></p>
         </div>
     </t>
 </templates>
