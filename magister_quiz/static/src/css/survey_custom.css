@@ -148,3 +148,12 @@ table {
         transform: rotate(-2deg);
     }
 }
+
+.answer-explanation {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.answer-explanation.invisible {
+    opacity: 0;
+    pointer-events: none;
+}

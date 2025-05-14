@@ -6,11 +6,11 @@
             <p id="question_timer" t-att-data-survey-title="survey.title"/>
             <script type="text/javascript" src="/magister_quiz/static/src/js/timer.js"/>
             <t t-if="survey and survey.question_ids">
-                <owl-component name="magister_quiz.CountdownTimer"
+                <!-- <owl-component name="magister_quiz.CountdownTimer"
                     t-att-t-props="{
                         'surveyTitle': survey.title,
                         'questionId': survey.question_ids[0].id
-                    }"/>
+                    }"/> -->
 
             </t>
         </xpath>
@@ -18,13 +18,23 @@
  
     <template id="survey_question_feedback" inherit_id="survey.question_container">
         <xpath expr="//div" position="inside">
-            <owl-component 
+            <!-- <owl-component 
                 name="magister_quiz.AnswerFeedback"
                 t-props='{
                     isCorrect: answer.is_correct if answer else False,
                     explanation: answer.explanation if answer else "",
                     showAfterNext: true
-                }'/>
+                }'/> -->
+                <t t-if="survey.scoring_type == 'scoring_with_answers_after_page'">
+                    <div t-attf-class="answer-explanation mt-3 ">
+                        <div class="alert alert-info">
+                            <i class="fa fa-info-circle me-2"/>
+                            <strong>Explicación:</strong>
+                            <p class="mb-0 mt-2" t-esc="question.explanation"/>
+                        </div>
+                    </div>
+                    <script type="text/javascript" src="/magister_quiz/static/src/js/answerExplained.js"/>
+                </t>
         </xpath>
     </template>
 

@@ -13,6 +13,7 @@ class QuizQuestion(models.Model):
         string="Correct Answer (True/False)",
         help="Mark for True, leave unmarked for False"
     )
+    explanation = fields.Char("Short Explanation", help="Fill in to show a short explanation after each question")
     
     @api.model
     def create(self, vals):

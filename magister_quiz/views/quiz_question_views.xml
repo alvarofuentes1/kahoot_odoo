@@ -26,6 +26,11 @@
                 <field name="survey_id" column_invisible="True" />
             </xpath>
 
+            <xpath expr="//field[@name='questions_selection']" position="before">
+                <label for="explanation" string="Explanation"/>
+                <field name="explanation" colspan="4"/>
+            </xpath>
+
         </field>
     </record>
 
