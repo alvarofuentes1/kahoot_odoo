@@ -18,14 +18,10 @@
  
     <template id="survey_question_feedback" inherit_id="survey.question_container">
         <xpath expr="//div" position="inside">
-            <!-- <owl-component 
-                name="magister_quiz.AnswerFeedback"
-                t-props='{
-                    isCorrect: answer.is_correct if answer else False,
-                    explanation: answer.explanation if answer else "",
-                    showAfterNext: true
-                }'/> -->
-                <t t-if="survey.scoring_type == 'scoring_with_answers_after_page'">
+           <t t-set="answerProps" t-value="{'explanation': question.explanation}"/>
+             <owl-component name="magister_quiz.AnswerFeedback" t-props="answerProps"/>
+
+                <!-- <t t-if="survey.scoring_type == 'scoring_with_answers_after_page'">
                     <div t-attf-class="answer-explanation mt-3 ">
                         <div class="alert alert-info">
                             <i class="fa fa-info-circle me-2"/>
@@ -33,8 +29,8 @@
                             <p class="mb-0 mt-2" t-esc="question.explanation"/>
                         </div>
                     </div>
-                    <script type="text/javascript" src="/magister_quiz/static/src/js/answerExplained.js"/>
-                </t>
+                    <script type="text/javascript" src="/magister_quiz/static/src/js/answerExplained.js" />
+                </t> -->
         </xpath>
     </template>
 

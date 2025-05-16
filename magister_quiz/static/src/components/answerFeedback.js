@@ -6,12 +6,13 @@ class AnswerFeedback extends Component {
     static template = "magister_quiz.AnswerFeedback";
     static props = {
         isCorrect: { type: Boolean },
-        explanation: { type: String, optional: true },
+        explanation: { type: String },
         showAfterNext: { type: Boolean, optional: true }
-    };
+    }; 
 
     setup() {
-        console.log("Componente AnswerFeedback montado")
+        console.log(this.props.isCorrect)
+        console.log(this.props.explanation)
         this.state = useState({
             showFeedback: false
         });

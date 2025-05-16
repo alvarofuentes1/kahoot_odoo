@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const titulo = temporizador?.dataset?.surveyTitle; //Variable donde aparece el título del temporizador
 
         if (!temporizador) {
-            console.warn("No se encontró el elemento del temporizador.");
             return;
         }
 
@@ -20,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
 
                 if (!data.is_question_timed) {
-                    console.log("El cuestionario no tiene temporizador activado.");
                     return;
                 }
 
@@ -93,8 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function enviarTiempoDeRespuesta(questionId, tiempoDeRespuesta) {
         let userInputToken = window.location.pathname.split('/')[3];
 
-        console.log("User Input Token:", userInputToken);
-
         setTimeout(() => {
             
             fetch("/survey/set_response_time", {
@@ -109,11 +105,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
             })
                 .then(response => {
-                    console.log("Response:", response);
                     return response.json()
                 })
                 .then(data => {
-                    console.log("Data:", data);
                     if (data.result.status === "ok") {
                         console.log("Tiempo de respuesta guardado en survey.user_input.line");
                     } else {
@@ -141,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const clickedElement = event.target;
             if (clickedElement.tagName === "BUTTON" && clickedElement.type === "submit") {
                 tiempoDeRespuesta = calcularTiempoDeRespuesta();
-                console.log("Tiempo de respuesta:", tiempoDeRespuesta);
 
                 // Seleccionar el contenedor principal
                 const answerWrapper = document.querySelector('.o_survey_answer_wrapper');
