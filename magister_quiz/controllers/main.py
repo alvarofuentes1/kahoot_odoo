@@ -125,3 +125,22 @@ class SurveyRedirectController(http.Controller):
                 'survey_navigation': request.env['ir.qweb']._render('survey.survey_navigation', survey_data),
                 'background_image_url': background_image_url
             }
+            
+    @http.route('/survey/correct_answers/<string:survey_token>/<string:answer_token>', type='json', auth='public', website=True)
+    def get_correct_answers(self, survey_token, answer_token, **kwargs):
+        access_data = request.env['survey.user_input']._get_access_data(survey_token, answer_token, ensure_token=True)
+        if access_data['validity_code'] is not True:
+            return {'error': access_data['validity_code']}
+
+        survey_sudo, answer_sudo = access_data['survey_sudo'], access_data['answer_sudo']
+        questions, _ = survey_sudo._get_survey_questions(answer=answer_sudo,
+                                                         page_id=kwargs.get('page_id'),
+                                                         question_id=kwargs.get('question_id'))
+
+        correct_answers = {}
+        if survey_sudo.scoring_type == 'scoring_with_answers_after_page':
+            scorable_questions = (questions - answer_sudo._get_inactive_conditional_questions()).filtered('is_scored_question')
+            correct_answers = scorable_questions._get_correct_answers()
+            _logger.info("ANSWERS AFTER PAGE ACTIVADO")
+
+        return correct_answers

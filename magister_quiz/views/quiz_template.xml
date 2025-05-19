@@ -4,14 +4,15 @@
     <template id="question_timer_container" inherit_id="survey.survey_fill_header">
         <xpath expr="//h1[@class='o_survey_timer_container timer text-end']" position="inside">
             <p id="question_timer" t-att-data-survey-title="survey.title"/>
-            <script type="text/javascript" src="/magister_quiz/static/src/js/timer.js"/>
+            <t t-if="survey.is_question_timed">
+                 <script type="text/javascript" src="/magister_quiz/static/src/js/timer.js"/>
+            </t>
             <t t-if="survey and survey.question_ids">
                 <!-- <owl-component name="magister_quiz.CountdownTimer"
                     t-att-t-props="{
                         'surveyTitle': survey.title,
                         'questionId': survey.question_ids[0].id
                     }"/> -->
-
             </t>
         </xpath>
     </template>
@@ -19,19 +20,23 @@
     <template id="survey_question_feedback" inherit_id="survey.question_container">
         <xpath expr="//div" position="inside">
            <t t-set="answerProps" t-value="{'explanation': question.explanation}"/>
-             <owl-component name="magister_quiz.AnswerFeedback" t-props="answerProps"/>
-
-                <!-- <t t-if="survey.scoring_type == 'scoring_with_answers_after_page'">
-                    <div t-attf-class="answer-explanation mt-3 ">
+             <!-- <owl-component name="magister_quiz.AnswerFeedback" t-props="answerProps"/> -->
+                <t t-if="survey.scoring_type == 'scoring_with_answers_after_page'">
+                    <div t-attf-class="answer-explanation mt-3 d-none">
                         <div class="alert alert-info">
                             <i class="fa fa-info-circle me-2"/>
                             <strong>Explicación:</strong>
+                            <t t-if="question.explanation">
                             <p class="mb-0 mt-2" t-esc="question.explanation"/>
+                            </t>
+                            <t t-else="">
+                                <p class="mb-0 mt-2">Esta pregunta no tiene explicación</p>
+                            </t>
                         </div>
                     </div>
-                    <script type="text/javascript" src="/magister_quiz/static/src/js/answerExplained.js" />
-                </t> -->
+                </t>
         </xpath>
     </template>
+
 
 </odoo>
