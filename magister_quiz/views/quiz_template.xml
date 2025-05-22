@@ -16,27 +16,31 @@
             </t>
         </xpath>
     </template>
- 
+    
     <template id="survey_question_feedback" inherit_id="survey.question_container">
         <xpath expr="//div" position="inside">
-           <t t-set="answerProps" t-value="{'explanation': question.explanation}"/>
-             <!-- <owl-component name="magister_quiz.AnswerFeedback" t-props="answerProps"/> -->
-                <t t-if="survey.scoring_type == 'scoring_with_answers_after_page'">
-                    <div t-attf-class="answer-explanation mt-3 d-none">
-                        <div class="alert alert-info">
-                            <i class="fa fa-info-circle me-2"/>
-                            <strong>Explicación:</strong>
-                            <t t-if="question.explanation">
-                            <p class="mb-0 mt-2" t-esc="question.explanation"/>
-                            </t>
-                            <t t-else="">
-                                <p class="mb-0 mt-2">Esta pregunta no tiene explicación</p>
-                            </t>
-                        </div>
+            <t t-if="survey.scoring_type == 'scoring_with_answers_after_page'">
+                <!-- <t t-esc="answer_lines.answer_is_correct"/>
+                <t t-set="answerProps" t-value="{
+                    'explanation': question.explanation or 'Sin Explicacion',
+                    'isCorrect': answer_lines.is_correct_answer or false
+                }"/>
+                <t t-esc="answerProps" />
+                <owl-component name="magister_quiz.AnswerFeedback" t-props="answerProps" /> -->
+                <div t-attf-class="answer-explanation mt-3 d-none">
+                    <div class="alert alert-info">
+                        <i class="fa fa-info-circle me-2" />
+                        <strong>Explicación:</strong>
+                        <t t-if="question.explanation">
+                            <p class="mb-0 mt-2" t-esc="question.explanation" />
+                        </t>
+                        <t t-else="">
+                            <p class="mb-0 mt-2">Esta pregunta no tiene explicación</p>
+                        </t>
                     </div>
-                </t>
+                </div>
+            </t>
         </xpath>
     </template>
-
 
 </odoo>

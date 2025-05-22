@@ -18,7 +18,7 @@ document.addEventListener('click', function (event) {
         const explanation = document.querySelector('.answer-explanation');
         if (explanation) {
             explanation.classList.remove('d-none')
-        } else console.log("No se encuentra en contenedor de la ecplicación")
+        } else console.log("No se encuentra en contenedor de la explicación")
     }
     
 })

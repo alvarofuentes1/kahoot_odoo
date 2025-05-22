@@ -5,14 +5,13 @@ import { registry } from "@web/core/registry";
 class AnswerFeedback extends Component {
     static template = "magister_quiz.AnswerFeedback";
     static props = {
-        isCorrect: { type: Boolean },
-        explanation: { type: String },
-        showAfterNext: { type: Boolean, optional: true }
-    }; 
+        isCorrect: { type: Boolean },  // answer.lines
+        explanation: { type: String }, // question.explanation
+    };
 
     setup() {
-        console.log(this.props.isCorrect)
-        console.log(this.props.explanation)
+        console.log("Is correct: " + this.props.isCorrect)
+        console.log("Explanation: " + this.props.explanation)
         this.state = useState({
             showFeedback: false
         });
@@ -29,7 +28,6 @@ class AnswerFeedback extends Component {
             });
         }
     }
-    
 }
 
 registry.category("public_components").add("magister_quiz.AnswerFeedback", AnswerFeedback);
