@@ -15,8 +15,7 @@ class QuizSurvey(models.Model):
     is_question_timed = fields.Boolean("Question Time Limit")
     time_per_question = fields.Integer("Time per Question (seconds)")
     session_ranking_ids = fields.One2many("survey.session_ranking", "survey_id")
-    is_question_explained = fields.Boolean("Short Explanation After Question", help="Check this box to display a short explanation after each question")
-     
+
     @api.onchange('is_question_timed')
     def _onchange_is_question_timed(self):
         if self.is_question_timed:

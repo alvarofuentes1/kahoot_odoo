@@ -58,7 +58,7 @@
 .o_survey_choice_btn {
     box-shadow: none !important;
     color: white !important;
-    background: linear-gradient(135deg, #FF512F, #DD2476);
+    background: linear-gradient(135deg, #FF512F, #b90984);
 }
 
 .o_survey_question_text_box,
@@ -79,18 +79,12 @@
 }
 
 .btn-primary,
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-secondary,
+.btn-secondary:hover {
     background: linear-gradient(135deg, #9681ac 0%, #921fc0 100%);
     border: white !important;
     box-shadow: white !important;
-    color: white !important;
-    font-family: 'Poppins-Medium';
-}
-
-.btn-secondary,
-.btn-secondary:hover {
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    border: white !important;
     color: white !important;
     font-family: 'Poppins-Medium';
 }

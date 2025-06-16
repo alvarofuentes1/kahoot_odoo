@@ -23,7 +23,6 @@ class AnswerFeedback extends Component {
             container.addEventListener('click', (event) => {
                 if (event.target.matches('.btn-primary[type="submit"]')) {
                     console.log("Botón siguiente pulsado vía delegación");
-                    this.state.showFeedback = true;
                 }
             });
         }

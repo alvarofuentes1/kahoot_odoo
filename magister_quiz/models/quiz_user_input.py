@@ -47,8 +47,7 @@ class QuizUserInput(models.Model):
                 'user_id': user_input.partner_id.id,  # Suponiendo que el usuario es el 'partner_id' de la entrada
                 'total_score': total_score,
             })
-            
-            
+
     def _mark_done(self):
         res = super()._mark_done()
         self.create_session_ranking()

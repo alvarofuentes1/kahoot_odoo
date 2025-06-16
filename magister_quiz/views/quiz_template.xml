@@ -20,10 +20,9 @@
     <template id="survey_question_feedback" inherit_id="survey.question_container">
         <xpath expr="//div" position="inside">
             <t t-if="survey.scoring_type == 'scoring_with_answers_after_page'">
-                <!-- <t t-esc="answer_lines.answer_is_correct"/>
-                <t t-set="answerProps" t-value="{
+                <!-- <t t-set="answerProps" t-value="{
                     'explanation': question.explanation or 'Sin Explicacion',
-                    'isCorrect': answer_lines.is_correct_answer or false
+                    'isCorrect': answer_lines.answer_is_correct or false
                 }"/>
                 <t t-esc="answerProps" />
                 <owl-component name="magister_quiz.AnswerFeedback" t-props="answerProps" /> -->

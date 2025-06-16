@@ -17,12 +17,6 @@
                         <field name="time_per_question" nolabel="1" class="oe_inline" /> seconds 
                     </div>
                 </div>
-                <label for="is_question_explained" string="Short Explanation"
-                    invisible="survey_type != 'quiz'" />
-                <div class="o_checkbox_optional_field"
-                    invisible="survey_type != 'quiz'">
-                    <field name="is_question_explained" nolabel="1" />
-                </div>
             </xpath>
         </field>
     </record>

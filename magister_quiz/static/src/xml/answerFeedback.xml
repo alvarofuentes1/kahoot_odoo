@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<templates xml:space="preserve">
-    <t t-name="magister_quiz.AnswerFeedback">
-    <div class="alert alert-info">
-        <p>Explanation: <t t-esc="props.explanation"/></p>
-        <p>Explanation: <t t-esc="props.isCorrect"/></p>
-    </div>
-</t>
 
-</templates>
+    <templates xml:space="preserve"> 
+        <t t-name="magister_quiz.AnswerFeedback">
+            <div class="alert alert-info">
+                <p>Explanation: </p>
+                <t t-esc="props.explanation"/>
+                <t t-esc="props.isCorrect"/>
+            </div>
+        </t>
+    </templates>
